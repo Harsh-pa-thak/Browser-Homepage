@@ -1,14 +1,10 @@
-.flip-clock {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
 
 .flip-clock-row {
   display: flex;
   align-items: center;
   gap: 5px;
 }
+
 
 .fc-wrap {
   position: relative;
@@ -140,27 +136,4 @@
   font-variant-numeric: tabular-nums;
 }
 
-.flip-clock-date {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding-left: 2px;
-}
 
-.fc-day {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.fc-dot {
-  font-size: 11px;
-  color: var(--text-dim);
-}
-
-.fc-date {
-  font-size: 11px;
-  color: var(--text-muted);
-}

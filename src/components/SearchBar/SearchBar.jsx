@@ -88,7 +88,11 @@ export default function SearchBar() {
             <line x1="12" y1="19" x2="12" y2="23" />
             <line x1="8" y1="23" x2="16" y2="23" />
           </svg>
-        </button>
+          </button>
+          {voiceBlocked && (
+            <span className="sb-voice-blocked-tip">Blocked in Brave</span>
+          )}
+        </div>
 
         <button
           id="lens-btn"

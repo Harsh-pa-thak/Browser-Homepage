@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useClock } from '../../hooks/useClock'
 import './FlipClock.css'
 
 // ─── Single digit flip card ─────────────────────────────────
@@ -67,24 +66,12 @@ function FC({ value, label }) {
   )
 }
 
-// ─── Full flip clock ─────────────────────────────────────────
-export default function FlipClock() {
-  const { clock, ampm, day, date } = useClock()
-  const [hh, mm] = clock.split(':')
-
+export default function FlipClock({ hh, mm, ampm }) {
   return (
-    <div className="flip-clock">
-      <div className="flip-clock-row">
-        <FC value={hh} />
-        <div className="fc-colon">:</div>
-        <FC value={mm} label={ampm} />
-      </div>
-
-      <div className="flip-clock-date">
-        <span className="fc-day">{day}</span>
-        <span className="fc-dot">·</span>
-        <span className="fc-date">{date}</span>
-      </div>
+    <div className="flip-clock-row">
+      <FC value={hh} />
+      <div className="fc-colon">:</div>
+      <FC value={mm} label={ampm} />
     </div>
   )
 }

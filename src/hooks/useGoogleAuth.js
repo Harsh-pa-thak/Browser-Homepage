@@ -1,9 +1,5 @@
 import { useState, useCallback, useRef } from 'react'
 
-/**
- * Handles Google OAuth 2.0 (GIS token client).
- * Requests scopes for both Gmail and YouTube in one sign-in flow.
- */
 export function useGoogleAuth(clientId) {
   const [token, setToken]     = useState(null)
   const [loading, setLoading] = useState(false)
@@ -12,7 +8,7 @@ export function useGoogleAuth(clientId) {
 
   const signIn = useCallback(() => {
     if (!clientId) {
-      setError('No OAuth Client ID configured — add it in Settings.')
+      setError('No OAuth Client ID configured.')
       return
     }
     setLoading(true)
@@ -28,10 +24,7 @@ export function useGoogleAuth(clientId) {
           ].join(' '),
           callback: (res) => {
             setLoading(false)
-            if (res.error) {
-              setError(res.error_description || res.error)
-              return
-            }
+            if (res.error) { setError(res.error_description || res.error); return }
             setToken(res.access_token)
           },
         })

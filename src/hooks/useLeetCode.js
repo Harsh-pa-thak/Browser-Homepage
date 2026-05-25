@@ -23,11 +23,11 @@ export function useLeetCode(username) {
           fetch(`${BASE}/${username}/solved`),
         ])
 
-        if (!profileRes.ok) throw new Error(`LeetCode API returned ${profileRes.status}`)
+        if (!profileRes.ok) throw new Error(`API returned ${profileRes.status}`)
 
         const profile = await profileRes.json()
-        const badges  = badgesRes.ok  ? (await badgesRes.json()).badges  || [] : []
-        const solved  = solvedRes.ok  ? (await solvedRes.json())               : {}
+        const badges  = badgesRes.ok ? (await badgesRes.json()).badges || [] : []
+        const solved  = solvedRes.ok ? await solvedRes.json()               : {}
 
         if (!cancelled) {
           setData({ ...profile, ...solved, badges })

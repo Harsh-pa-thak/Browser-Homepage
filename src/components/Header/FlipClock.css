@@ -1,0 +1,166 @@
+.flip-clock {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.flip-clock-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.fc-wrap {
+  position: relative;
+  width: 76px;
+  height: 88px;
+  perspective: 400px;
+}
+
+.fc-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.fc-half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 44px;
+  overflow: hidden;
+}
+
+.fc-half-top {
+  top: 0;
+  background: #1f1f1f;
+}
+
+.fc-half-bot {
+  bottom: 0;
+  background: #171717;
+}
+
+.fc-digit {
+  position: absolute;
+  width: 100%;
+  height: 88px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  font-weight: 700;
+  color: #e0e0e0;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -3px;
+  line-height: 1;
+}
+
+.fc-digit-shift {
+  top: -44px;
+}
+
+.fc-split-line {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: #111;
+  z-index: 5;
+}
+
+.fc-flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 44px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.fc-flap-top {
+  top: 0;
+  border-radius: 10px 10px 0 0;
+  background: #1f1f1f;
+  transform-origin: center bottom;
+}
+
+.fc-flap-bot {
+  bottom: 0;
+  border-radius: 0 0 10px 10px;
+  background: #171717;
+  transform-origin: center top;
+}
+
+.fc-flap-top .fc-digit  { top: 0; }
+.fc-flap-bot .fc-digit  { top: -44px; }
+
+@keyframes fc-fall {
+  from { transform: rotateX(0deg); }
+  to   { transform: rotateX(-90deg); }
+}
+
+@keyframes fc-rise {
+  from { transform: rotateX(90deg); }
+  to   { transform: rotateX(0deg); }
+}
+
+.fc-anim-fall {
+  animation: fc-fall 0.28s ease-in forwards;
+}
+
+.fc-anim-rise {
+  transform: rotateX(90deg);
+  animation: fc-rise 0.28s ease-out forwards;
+}
+
+.fc-label {
+  position: absolute;
+  bottom: 5px;
+  left: 7px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.fc-colon {
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1;
+  padding-bottom: 6px;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.flip-clock-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 2px;
+}
+
+.fc-day {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.fc-dot {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.fc-date {
+  font-size: 11px;
+  color: var(--text-muted);
+}

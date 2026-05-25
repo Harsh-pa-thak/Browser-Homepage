@@ -2,8 +2,9 @@ import { useState, useRef } from 'react'
 import './SearchBar.css'
 
 export default function SearchBar() {
-  const [query, setQuery] = useState('')
-  const [listening, setListening] = useState(false)
+  const [query, setQuery]           = useState('')
+  const [listening, setListening]   = useState(false)
+  const [voiceBlocked, setVoiceBlocked] = useState(false)
   const inputRef = useRef(null)
 
   function handleSubmit(e) {
@@ -13,23 +14,33 @@ export default function SearchBar() {
   }
 
   function handleVoice() {
+    setVoiceBlocked(false)
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition
-    if (!SR) {
-      window.open('https://www.google.com/search?q=', '_blank')
-      return
-    }
+    if (!SR) { setVoiceBlocked(true); return }
+
     const r = new SR()
-    r.lang = 'en-US'
-    r.onstart = () => setListening(true)
-    r.onend = () => setListening(false)
-    r.onerror = (e) => {
+    r.lang              = 'en-US'
+    r.interimResults    = false
+    r.maxAlternatives   = 1
+    r.onstart           = () => setListening(true)
+    r.onend             = () => setListening(false)
+    r.onerror           = (e) => {
       setListening(false)
       if (e.error === 'service-not-allowed' || e.error === 'not-allowed') {
-        window.open('https://www.google.com/search?q=', '_blank')
+        setVoiceBlocked(true)
       }
     }
-    r.onresult = (e) => { setQuery(e.results[0][0].transcript); inputRef.current?.focus() }
-    r.start()
+    r.onresult = (e) => {
+      setQuery(e.results[0][0].transcript)
+      inputRef.current?.focus()
+    }
+
+    try {
+      r.start()
+    } catch (_) {
+      setListening(false)
+      setVoiceBlocked(true)
+    }
   }
 
   function handleLens() {
@@ -61,13 +72,15 @@ export default function SearchBar() {
       />
 
       <div className="search-bar-actions">
-        <button
-          id="voice-btn"
-          type="button"
-          className={`sb-icon-btn ${listening ? 'sb-listening' : ''}`}
-          onClick={handleVoice}
-          aria-label="Voice search"
-        >
+        <div className="sb-voice-wrap">
+          <button
+            id="voice-btn"
+            type="button"
+            className={`sb-icon-btn ${listening ? 'sb-listening' : ''} ${voiceBlocked ? 'sb-blocked' : ''}`}
+            onClick={handleVoice}
+            aria-label="Voice search"
+            title={voiceBlocked ? 'Voice blocked in Brave — enable in brave://settings/privacy' : 'Voice search'}
+          >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="2">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />

@@ -1,4 +1,5 @@
 import FlipClock from './FlipClock'
+import SearchBar from '../SearchBar/SearchBar'
 import { useClock } from '../../hooks/useClock'
 import './Header.css'
 
@@ -9,6 +10,10 @@ export default function Header({ onSettingsClick }) {
   return (
     <header className="header">
       <FlipClock hh={hh} mm={mm} ampm={ampm} />
+
+      <div className="header-search">
+        <SearchBar />
+      </div>
 
       <div className="header-right">
         <div className="header-date">

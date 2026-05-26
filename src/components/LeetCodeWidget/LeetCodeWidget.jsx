@@ -39,9 +39,9 @@ export default function LeetCodeWidget() {
     )
   }
 
-  if (loading) return <Skeleton />
+  if (loading || (!data && !error)) return <Skeleton />
 
-  if (error) {
+  if (error || !data) {
     return (
       <div className="lc-widget lc-state">
         <span className="lc-state-text">Could not load LeetCode data</span>

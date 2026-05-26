@@ -1,5 +1,6 @@
 import FlipCard from '../FlipCard/FlipCard'
 import LeetCodeWidget from '../LeetCodeWidget/LeetCodeWidget'
+import GitHubWidget from '../GitHubWidget/GitHubWidget'
 import { SIMPLE_SITES } from '../../data/sites'
 import './BentoGrid.css'
 
@@ -19,7 +20,7 @@ export default function BentoGrid() {
     <div className="bento-grid">
 
       <div className="bento-cell bento-github">
-        <WidgetSlot name="GitHub" id="github" />
+        <GitHubWidget />
       </div>
 
       <div className="bento-cell bento-leetcode">

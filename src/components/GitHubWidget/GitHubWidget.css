@@ -6,8 +6,8 @@
   border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  padding: 14px 16px;
-  gap: 10px;
+  padding: 20px;
+  gap: 18px;
   overflow: hidden;
   cursor: pointer;
   transition: border-color 0.2s;
@@ -15,7 +15,6 @@
 }
 .gh-widget:hover { border-color: var(--border-hover); }
 
-/* States */
 .gh-state {
   align-items: center;
   justify-content: center;
@@ -24,57 +23,116 @@
   font-size: 11px;
   color: var(--text-dim);
   letter-spacing: 0.04em;
-  text-align: center;
 }
 
-/* Header */
-.gh-header {
+/* ── Top ── */
+.gh-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
 }
 
-.gh-brand {
+.gh-user {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: var(--text);
+  gap: 14px;
 }
 
-.gh-brand-name {
-  font-size: 13px;
-  font-weight: 600;
+.gh-avatar, .gh-avatar-sk {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.gh-avatar-sk {
+  background: var(--surface-2);
+}
+
+.gh-user-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.gh-name {
+  font-size: 18px;
+  font-weight: 800;
   color: var(--text);
+  letter-spacing: -0.3px;
 }
 
 .gh-username {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-muted);
 }
 
-.gh-header-stats {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-.gh-dot {
+.gh-brand {
   color: var(--text-dim);
-}
-
-/* Streak / graph area — fills available space */
-.gh-graph-area {
-  flex: 1;
-  min-height: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #161616;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+/* ── Middle: Stats Row ── */
+.gh-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-2);
+  border-radius: 10px;
+  padding: 14px 24px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.gh-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.gh-stat-val {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.5px;
+}
+
+.gh-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.gh-stat-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+}
+
+/* ── Bottom: Streak Area ── */
+.gh-streak-area {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
 }
 
 .gh-streak-img {
@@ -82,73 +140,19 @@
   height: 100%;
   object-fit: contain;
   display: block;
+  transform: scale(1.5) translateY(6px);
 }
 
-/* Recent events */
-.gh-events {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex-shrink: 0;
-  border-top: 1px solid var(--border);
-  padding-top: 10px;
-}
-
-.gh-no-events {
-  font-size: 11px;
-  color: var(--text-dim);
-}
-
-.gh-event-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.gh-ev-icon {
-  font-size: 13px;
-  color: var(--text-dim);
-  width: 16px;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.gh-ev-body {
-  flex: 1;
-  min-width: 0;
-  font-size: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.gh-ev-verb {
-  color: var(--text-muted);
-}
-
-.gh-ev-repo {
-  color: var(--text);
-  font-weight: 500;
-}
-
-.gh-ev-time {
-  font-size: 11px;
-  color: var(--text-dim);
-  flex-shrink: 0;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Skeleton */
+/* ── Skeleton ── */
 .gh-sk {
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--surface-2);
   animation: gh-pulse 1.6s ease-in-out infinite;
   flex-shrink: 0;
 }
-.gh-sk-header { height: 20px; width: 55%; }
-.gh-sk-graph  { flex: 1; min-height: 0; }
-.gh-sk-stats  { height: 16px; width: 45%; }
-.gh-sk-events { height: 70px; }
+.gh-sk-top { height: 52px; width: 100%; border-radius: 26px; }
+.gh-sk-mid { height: 60px; width: 100%; }
+.gh-sk-bot { flex: 1; width: 100%; }
 
 @keyframes gh-pulse {
   0%, 100% { opacity: 0.3; }

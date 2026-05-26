@@ -13,9 +13,9 @@ export default function App() {
 
       <div className="app-body">
         <div className="flip-preview-grid">
-          {SIMPLE_SITES.map(site => (
-            <div key={site.id} style={{ width: 120, height: 120 }}>
-              <FlipCard site={site} />
+          {SIMPLE_SITES.map((site, i) => (
+            <div key={site.id} style={{ width: 130, height: 130 }}>
+              <FlipCard site={site} initialDelay={i * 900} />
             </div>
           ))}
         </div>

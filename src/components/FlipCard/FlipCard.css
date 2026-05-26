@@ -1,7 +1,7 @@
 .flip-card {
   width: 100%;
   height: 100%;
-  perspective: 800px;
+  perspective: 1000px;
   cursor: pointer;
 }
 
@@ -10,10 +10,10 @@
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.flip-card:hover .flip-inner {
+.flip-card.is-flipped .flip-inner {
   transform: rotateY(180deg);
 }
 
@@ -23,59 +23,56 @@
   inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border-radius: var(--radius);
+  border-radius: 14px;
   border: 1px solid var(--border);
-  background: var(--surface);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.flip-front {
+  background: #181818;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-card.is-flipped .flip-front,
+.flip-card:hover .flip-front {
+  border-color: #3a3a3a;
+}
+
+.flip-back {
+  background: #1c1c1c;
+  transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  transition: border-color 0.2s;
+  border-color: #3a3a3a;
 }
 
-.flip-card:hover .flip-front {
-  border-color: var(--border-hover);
-}
-
-.flip-back {
-  transform: rotateY(180deg);
-  background: var(--surface-2);
-  gap: 12px;
-}
-
-.flip-favicon {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
+.flip-logo {
+  width: 64%;
+  height: 64%;
   object-fit: contain;
+  transition: transform 0.3s;
+}
+
+.flip-card:not(.is-flipped):hover .flip-logo {
+  transform: scale(1.05);
 }
 
 .flip-initial {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-muted);
+  font-size: 44px;
+  font-weight: 800;
+  color: #444;
   text-transform: uppercase;
+  font-family: var(--font);
 }
 
-.flip-desktop-icon {
-  color: var(--text-muted);
-}
-
-.flip-name {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-  text-align: center;
+.flip-desktop-wrap {
+  color: #444;
 }
 
 .flip-back-name {
@@ -83,25 +80,18 @@
   font-weight: 600;
   color: var(--text);
   letter-spacing: 0.01em;
+  text-align: center;
 }
 
-.flip-open-btn {
+.flip-back-arrow {
+  color: var(--text-muted);
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-muted);
-  padding: 5px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  font-family: var(--font);
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  justify-content: center;
+  transition: color 0.2s, transform 0.2s;
 }
 
-.flip-open-btn:hover {
+.flip-card:hover .flip-back-arrow {
   color: var(--text);
-  border-color: var(--border-hover);
-  background: #2a2a2a;
+  transform: translateX(3px);
 }

@@ -1,0 +1,92 @@
+.flip-card {
+  width: 100%;
+  height: 100%;
+  perspective: 800px;
+  cursor: pointer;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: border-color 0.2s;
+}
+
+.flip-card:hover .flip-front {
+  border-color: var(--border-hover);
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  background: var(--surface-2);
+  gap: 12px;
+}
+
+.flip-favicon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.flip-desktop-icon {
+  color: var(--text-muted);
+}
+
+.flip-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.flip-back-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.flip-open-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-family: var(--font);
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.flip-open-btn:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
+  background: #2a2a2a;
+}

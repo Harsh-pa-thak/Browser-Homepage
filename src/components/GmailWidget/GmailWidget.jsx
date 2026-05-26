@@ -1,172 +1,229 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useGoogleLogin } from '@react-oauth/google'
 import './GmailWidget.css'
 
-const GmailIcon = () => (
-  <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-    <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M22 6L12 13L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
+// Matches Gmail's actual avatar color palette
+const AVATAR_COLORS = [
+  '#d93025', '#e37400', '#188038', '#1967d2',
+  '#6f3dc4', '#b5152b', '#0076a8', '#c75000',
+]
+
+function senderColor(name) {
+  let hash = 0
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash)
+  return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length]
+}
+
+function SenderAvatar({ name }) {
+  const initial = (name || '?').charAt(0).toUpperCase()
+  return (
+    <div className="gmail-avatar" style={{ background: senderColor(name || '') }}>
+      {initial}
+    </div>
+  )
+}
 
 function getHeader(headers, name) {
-  const header = headers.find(h => h.name.toLowerCase() === name.toLowerCase())
-  return header ? header.value : ''
+  return headers.find(h => h.name.toLowerCase() === name.toLowerCase())?.value || ''
 }
 
 function parseEmail(message) {
   const headers = message.payload.headers
-  const subject = getHeader(headers, 'Subject')
-  let sender = getHeader(headers, 'From')
-  
-  if (sender.includes('<')) {
-    sender = sender.split('<')[0].replace(/"/g, '').trim()
+  const subject = getHeader(headers, 'Subject') || '(no subject)'
+  let rawFrom = getHeader(headers, 'From')
+
+  let sender = rawFrom
+  if (rawFrom.includes('<')) {
+    sender = rawFrom.split('<')[0].replace(/"/g, '').trim()
+  } else if (rawFrom.includes('@')) {
+    sender = rawFrom.split('@')[0]
   }
-  
-  const dateStr = getHeader(headers, 'Date')
-  const dateObj = new Date(dateStr)
-  
+
+  const dateObj = new Date(getHeader(headers, 'Date'))
   const now = new Date()
   let time = ''
   if (dateObj.toDateString() === now.toDateString()) {
     time = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-  } else if (now - dateObj < 86400000 * 2) {
-    time = 'Yesterday'
+  } else if (now - dateObj < 86400000 * 7) {
+    time = dateObj.toLocaleDateString([], { weekday: 'short' })
   } else {
     time = dateObj.toLocaleDateString([], { month: 'short', day: 'numeric' })
   }
-
-  const unread = message.labelIds?.includes('UNREAD')
 
   return {
     id: message.id,
     sender,
     subject,
     time,
-    unread,
+    unread: message.labelIds?.includes('UNREAD'),
+    url: `https://mail.google.com/mail/u/0/#inbox/${message.id}`,
   }
+}
+
+function SkeletonRows() {
+  return [...Array(6)].map((_, i) => (
+    <div key={i} className="gmail-item-sk">
+      <div className="gmail-sk gmail-sk-avatar" />
+      <div className="gmail-sk-body">
+        <div className="gmail-sk gmail-sk-line" />
+        <div className="gmail-sk gmail-sk-line gmail-sk-line-sm" />
+      </div>
+    </div>
+  ))
 }
 
 export default function GmailWidget() {
   const [emails, setEmails] = useState([])
+  const [userInfo, setUserInfo] = useState(null)
+  const [unreadTotal, setUnreadTotal] = useState(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('gmail_token'))
 
-  const fetchEmails = async (accessToken) => {
+  const fetchAll = useCallback(async (accessToken) => {
     setLoading(true)
     setError(null)
     try {
-      // 1. Fetch message IDs
-      const listRes = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages?q=in:inbox&maxResults=6', {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      })
+      const [userRes, listRes, labelRes] = await Promise.all([
+        fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }),
+        fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages?q=in:inbox&maxResults=6', {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }),
+        fetch('https://gmail.googleapis.com/gmail/v1/users/me/labels/INBOX', {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }),
+      ])
 
       if (!listRes.ok) {
         const errBody = await listRes.json().catch(() => ({}))
-        const reason = errBody?.error?.message || errBody?.error?.status || `HTTP ${listRes.status}`
-        console.error('Gmail API error:', errBody)
-        
+        const reason = errBody?.error?.message || `HTTP ${listRes.status}`
         if (listRes.status === 401 || listRes.status === 403) {
           localStorage.removeItem('gmail_token')
           setToken(null)
-          throw new Error(reason)
         }
         throw new Error(reason)
       }
-      
-      const listData = await listRes.json()
-      const messageIds = listData.messages || []
 
-      // 2. Fetch full message details (metadata only for speed)
-      const detailPromises = messageIds.map(msg => 
-        fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${msg.id}?format=metadata&metadataHeaders=Subject&metadataHeaders=From&metadataHeaders=Date`, {
-          headers: { Authorization: `Bearer ${accessToken}` }
-        }).then(res => res.json())
+      const [userJson, listData, labelData] = await Promise.all([
+        userRes.json(), listRes.json(), labelRes.json()
+      ])
+      setUserInfo(userJson)
+      setUnreadTotal(labelData.messagesUnread ?? 0)
+
+      const msgs = await Promise.all(
+        (listData.messages || []).map(m =>
+          fetch(
+            `https://gmail.googleapis.com/gmail/v1/users/me/messages/${m.id}?format=metadata&metadataHeaders=Subject&metadataHeaders=From&metadataHeaders=Date`,
+            { headers: { Authorization: `Bearer ${accessToken}` } }
+          ).then(r => r.json())
+        )
       )
-
-      const messages = await Promise.all(detailPromises)
-      const parsedEmails = messages.map(parseEmail)
-      setEmails(parsedEmails)
+      setEmails(msgs.map(parseEmail))
     } catch (err) {
-      console.error(err)
       setError(err.message)
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
-    if (token) {
-      fetchEmails(token)
-    }
-  }, [token])
+    if (token) fetchAll(token)
+  }, [token, fetchAll])
 
   const login = useGoogleLogin({
-    scope: 'https://www.googleapis.com/auth/gmail.readonly',
-    onSuccess: (tokenResponse) => {
-      const accessToken = tokenResponse.access_token
-      localStorage.setItem('gmail_token', accessToken)
-      setToken(accessToken)
+    scope: [
+      'https://www.googleapis.com/auth/gmail.readonly',
+      'https://www.googleapis.com/auth/userinfo.email',
+      'https://www.googleapis.com/auth/userinfo.profile',
+    ].join(' '),
+    onSuccess: (res) => {
+      localStorage.setItem('gmail_token', res.access_token)
+      setToken(res.access_token)
     },
-    onError: (err) => {
-      console.error('Login Failed', err)
-      setError('Login failed')
-    }
+    onError: () => setError('Login failed'),
   })
 
   const unreadCount = emails.filter(e => e.unread).length
 
   return (
     <div className="gmail-widget">
-      <div className="gmail-header">
+
+      {/* Header */}
+      <div className="gmail-header" onClick={() => window.open('https://mail.google.com', '_blank')}>
         <div className="gmail-brand">
-          <div className="gmail-icon-wrap">
-            <GmailIcon />
+          {/* Gmail 'M' logo in SVG — no file needed */}
+          <svg className="gmail-logo-svg" viewBox="0 0 48 48" width="28" height="28">
+            <path fill="#EA4335" d="M6 40h6V20.6L2 15v21a3 3 0 003 3z"/>
+            <path fill="#34A853" d="M36 40h6a3 3 0 003-3V15l-9 5.6z"/>
+            <path fill="#4285F4" d="M36 8l-12 7.6L12 8H6l18 11.4L42 8z"/>
+            <path fill="#FBBC04" d="M2 15l10 5.6V8z"/>
+            <path fill="#EA4335" d="M42 8l-6 12.6L46 15z"/>
+            <path fill="#C5221F" d="M12 20.6L6 15l6-7.1z"/>
+          </svg>
+          <div className="gmail-header-text">
+            <span className="gmail-title">Gmail</span>
+            {userInfo && <span className="gmail-email">{userInfo.email}</span>}
           </div>
-          <span className="gmail-title">Inbox</span>
         </div>
-        {unreadCount > 0 && <div className="gmail-badge">{unreadCount} New</div>}
+        <div className="gmail-header-right">
+          {unreadTotal > 0 && (
+            <span className="gmail-unread-count">+{unreadTotal}</span>
+          )}
+          {userInfo?.picture ? (
+            <img src={userInfo.picture} className="gmail-profile-pic" alt="Profile" />
+          ) : token && (
+            <div className="gmail-profile-sk" />
+          )}
+        </div>
       </div>
 
+      {/* List */}
       <div className="gmail-list">
         {!token ? (
           <div className="gmail-state" onClick={() => login()}>
+            <svg width="24" height="24" viewBox="0 0 48 48" style={{ marginBottom: 8 }}>
+              <path fill="#EA4335" d="M6 40h6V20.6L2 15v21a3 3 0 003 3z"/>
+              <path fill="#34A853" d="M36 40h6a3 3 0 003-3V15l-9 5.6z"/>
+              <path fill="#4285F4" d="M36 8l-12 7.6L12 8H6l18 11.4L42 8z"/>
+              <path fill="#FBBC04" d="M2 15l10 5.6V8z"/>
+              <path fill="#EA4335" d="M42 8l-6 12.6L46 15z"/>
+            </svg>
             <span className="gmail-state-text">Connect Gmail</span>
           </div>
         ) : loading ? (
-          <div className="gmail-state-transparent">
-            <div className="gmail-pulse-dot" />
-            <span className="gmail-state-text">Syncing...</span>
-          </div>
+          <SkeletonRows />
         ) : error ? (
           <div className="gmail-state" onClick={() => login()}>
-            <span className="gmail-state-text" style={{ textAlign: 'center', padding: '0 8px', fontSize: '11px' }}>
-              ⚠ {error}<br /><span style={{ opacity: 0.6 }}>Click to reconnect</span>
+            <span className="gmail-state-text" style={{ fontSize: 11, textAlign: 'center' }}>
+              ⚠ {error}<br /><span style={{ opacity: 0.5 }}>Tap to reconnect</span>
             </span>
           </div>
         ) : emails.length === 0 ? (
-          <div className="gmail-state-transparent">
+          <div className="gmail-state-center">
             <span className="gmail-state-text">Inbox Zero ✨</span>
           </div>
         ) : (
           emails.map(email => (
-            <div key={email.id} className={`gmail-item ${email.unread ? 'unread' : ''}`}>
-              <div className="gmail-item-left">
-                {email.unread && <span className="gmail-dot" />}
-                <span 
-                  className="gmail-sender" 
-                  style={{ marginLeft: email.unread ? 0 : '14px' }}
-                >
-                  {email.sender}
-                </span>
+            <div
+              key={email.id}
+              className={`gmail-item ${email.unread ? 'unread' : ''}`}
+              onClick={() => window.open(email.url, '_blank')}
+            >
+              <SenderAvatar name={email.sender} />
+              <div className="gmail-item-body">
+                <div className="gmail-item-row1">
+                  <span className="gmail-sender">{email.sender}</span>
+                  <span className="gmail-time">{email.time}</span>
+                </div>
+                <span className="gmail-subject">{email.subject}</span>
               </div>
-              <span className="gmail-subject">{email.subject}</span>
-              <span className="gmail-time">{email.time}</span>
             </div>
           ))
         )}
       </div>
+
     </div>
   )
 }

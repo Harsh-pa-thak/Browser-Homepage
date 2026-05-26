@@ -51,6 +51,21 @@
   object-fit: contain;
 }
 
+.flip-initial {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
 .flip-desktop-icon {
   color: var(--text-muted);
 }

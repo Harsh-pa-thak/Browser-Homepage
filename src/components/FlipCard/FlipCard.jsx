@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { faviconUrl } from '../../data/sites'
 import './FlipCard.css'
 
 export default function FlipCard({ site }) {
+  const [imgFailed, setImgFailed] = useState(false)
+
   const url = site.isDesktop
     ? (import.meta.env.VITE_DESKTOP_URL || 'file:///home/')
     : site.url
@@ -19,16 +22,26 @@ export default function FlipCard({ site }) {
       <div className="flip-inner">
 
         <div className="flip-front">
-          {logoSrc
-            ? <img className="flip-favicon" src={logoSrc} alt={site.name} width={32} height={32} />
-            : <span className="flip-desktop-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" strokeWidth="1.5">
-                  <rect x="2" y="3" width="20" height="14" rx="2"/>
-                  <path d="M8 21h8M12 17v4"/>
-                </svg>
-              </span>
-          }
+          {site.isDesktop ? (
+            <span className="flip-desktop-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="1.5">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+              </svg>
+            </span>
+          ) : imgFailed ? (
+            <span className="flip-initial">{site.name[0]}</span>
+          ) : (
+            <img
+              className="flip-favicon"
+              src={logoSrc}
+              alt={site.name}
+              width={32}
+              height={32}
+              onError={() => setImgFailed(true)}
+            />
+          )}
           <span className="flip-name">{site.name}</span>
         </div>
 

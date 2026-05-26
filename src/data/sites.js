@@ -15,7 +15,7 @@ export const SITES = [
   { id: 'lms',         name: 'LMS',           url: 'https://lms.vit.ac.in',     logo: '/logos/moodle.png' },
   { id: 'netlify',     name: 'Netlify',       url: 'https://netlify.com' },
   { id: 'render',      name: 'Render',        url: 'https://render.com' },
-  { id: 'movies',      name: '123Movies',     url: 'https://123movies9.mom' },
+  { id: 'movies',      name: '123Movies',     url: 'https://123movies9.mom',    logo: 'https://www.google.com/s2/favicons?sz=64&domain=netflix.com' },
   { id: 'instagram',   name: 'Instagram',     url: 'https://instagram.com' },
   { id: 'desktop',     name: 'Desktop',       url: '', isDesktop: true },
 ]

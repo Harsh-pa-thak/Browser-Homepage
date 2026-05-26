@@ -2,10 +2,9 @@ import { useState, useRef } from 'react'
 import './SearchBar.css'
 
 export default function SearchBar() {
-  const [query, setQuery]           = useState('')
-  const [listening, setListening]   = useState(false)
-  const [voiceBlocked, setVoiceBlocked] = useState(false)
-  const inputRef = useRef(null)
+  const [query, setQuery]         = useState('')
+  const [listening, setListening] = useState(false)
+  const inputRef                  = useRef(null)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -14,33 +13,15 @@ export default function SearchBar() {
   }
 
   function handleVoice() {
-    setVoiceBlocked(false)
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition
-    if (!SR) { setVoiceBlocked(true); return }
-
+    if (!SR) return
     const r = new SR()
-    r.lang              = 'en-US'
-    r.interimResults    = false
-    r.maxAlternatives   = 1
-    r.onstart           = () => setListening(true)
-    r.onend             = () => setListening(false)
-    r.onerror           = (e) => {
-      setListening(false)
-      if (e.error === 'service-not-allowed' || e.error === 'not-allowed') {
-        setVoiceBlocked(true)
-      }
-    }
-    r.onresult = (e) => {
-      setQuery(e.results[0][0].transcript)
-      inputRef.current?.focus()
-    }
-
-    try {
-      r.start()
-    } catch (_) {
-      setListening(false)
-      setVoiceBlocked(true)
-    }
+    r.lang         = 'en-US'
+    r.interimResults = false
+    r.onstart      = () => setListening(true)
+    r.onend        = () => setListening(false)
+    r.onresult     = (e) => { setQuery(e.results[0][0].transcript); inputRef.current?.focus() }
+    r.start()
   }
 
   function handleLens() {
@@ -72,27 +53,21 @@ export default function SearchBar() {
       />
 
       <div className="search-bar-actions">
-        <div className="sb-voice-wrap">
-          <button
-            id="voice-btn"
-            type="button"
-            className={`sb-icon-btn ${listening ? 'sb-listening' : ''} ${voiceBlocked ? 'sb-blocked' : ''}`}
-            onClick={handleVoice}
-            aria-label="Voice search"
-            title={voiceBlocked ? 'Voice blocked in Brave — enable in brave://settings/privacy' : 'Voice search'}
-          >
+        <button
+          id="voice-btn"
+          type="button"
+          className={`sb-icon-btn ${listening ? 'sb-listening' : ''}`}
+          onClick={handleVoice}
+          aria-label="Voice search"
+        >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="2">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
             <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
             <line x1="12" y1="19" x2="12" y2="23" />
-            <line x1="8" y1="23" x2="16" y2="23" />
+            <line x1="8"  y1="23" x2="16" y2="23" />
           </svg>
-          </button>
-          {voiceBlocked && (
-            <span className="sb-voice-blocked-tip">Blocked in Brave</span>
-          )}
-        </div>
+        </button>
 
         <button
           id="lens-btn"

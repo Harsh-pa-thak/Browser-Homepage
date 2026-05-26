@@ -17,20 +17,22 @@ export function useLeetCode(username) {
 
     async function load() {
       try {
-        const [profileRes, badgesRes, solvedRes] = await Promise.all([
+        const [profileRes, badgesRes, solvedRes, contestRes] = await Promise.all([
           fetch(`${BASE}/${username}/profile`),
           fetch(`${BASE}/${username}/badges`),
           fetch(`${BASE}/${username}/solved`),
+          fetch(`${BASE}/${username}/contest`),
         ])
 
-        if (!profileRes.ok) throw new Error(`API returned ${profileRes.status}`)
+        if (!profileRes.ok) throw new Error(`API ${profileRes.status}`)
 
         const profile = await profileRes.json()
-        const badges  = badgesRes.ok ? (await badgesRes.json()).badges || [] : []
-        const solved  = solvedRes.ok ? await solvedRes.json()               : {}
+        const badges  = badgesRes.ok  ? (await badgesRes.json()).badges || [] : []
+        const solved  = solvedRes.ok  ? await solvedRes.json()               : {}
+        const contest = contestRes.ok ? await contestRes.json()              : {}
 
         if (!cancelled) {
-          setData({ ...profile, ...solved, badges })
+          setData({ ...profile, ...solved, badges, contest })
           setLoading(false)
         }
       } catch (e) {

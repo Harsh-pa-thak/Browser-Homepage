@@ -25,8 +25,8 @@ export default function FlipCard({ site, initialDelay = 0 }) {
         timerRef.current = setTimeout(() => {
           setFlipped(false)
           cycle()
-        }, 2400)
-      }, Math.random() * 5000 + 3000)
+        }, 3000)
+      }, Math.random() * 10000 + 8000)
     }
 
     timerRef.current = setTimeout(cycle, initialDelay)
@@ -74,6 +74,7 @@ export default function FlipCard({ site, initialDelay = 0 }) {
               className="flip-logo"
               src={logoSrc}
               alt={site.name}
+              style={{ width: '78%', height: '78%', objectFit: 'contain' }}
               onError={() => setImgFailed(true)}
             />
           )}

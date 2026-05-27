@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Header from './components/Header/Header'
 import BentoGrid from './components/BentoGrid/BentoGrid'
+import SettingsPanel from './components/SettingsPanel/SettingsPanel'
 import './App.css'
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
       <div className="app-body">
         <BentoGrid />
       </div>
+      {settingsOpen && <SettingsPanel onClose={() => setSettingsOpen(false)} />}
     </div>
   )
 }

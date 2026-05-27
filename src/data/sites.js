@@ -1,4 +1,4 @@
-export const SITES = [
+const BASE_SITES = [
   { id: 'github', name: 'GitHub', url: 'https://github.com', type: 'widget' },
   { id: 'leetcode', name: 'LeetCode', url: 'https://leetcode.com', type: 'widget' },
   { id: 'gmail', name: 'Gmail', url: 'https://mail.google.com', type: 'widget' },
@@ -19,6 +19,15 @@ export const SITES = [
   { id: 'claude', name: 'Claude', url: 'https://claude.ai', logo: 'https://www.google.com/s2/favicons?sz=64&domain=claude.ai' },
   { id: 'gpt', name: 'CharGpt', url: 'https://chatgpt.com', logo: 'https://www.google.com/s2/favicons?sz=64&domain=chatgpt.com' }
 ]
+
+const userSitesOverrides = JSON.parse(localStorage.getItem('CUSTOM_SITES') || '{}')
+
+export const SITES = BASE_SITES.map(site => {
+  if (userSitesOverrides[site.id]) {
+    return { ...site, ...userSitesOverrides[site.id] }
+  }
+  return site
+})
 
 export const SIMPLE_SITES = SITES.filter(s => s.type !== 'widget')
 

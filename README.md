@@ -23,6 +23,9 @@ A highly responsive and functional browser homepage designed specifically for de
 
 ## Screenshots and Previews
 
+### Demonstration Video
+<video src="demo/demo_video_2x.webm" width="100%" autoplay loop muted playsinline controls></video>
+
 ### Dashboard Interface
 <img width="2879" height="1571" alt="demo image" src="https://github.com/user-attachments/assets/39a470e6-a304-4f11-875b-92506cd3ca0a" />
 
@@ -45,7 +48,10 @@ Access the live application directly:
 To integrate this dashboard into your workflow, configure it as your browser's default homepage or new tab page.
 
 ### Visual Walkthrough
-- A step-by-step video tutorial is available in the repository at [`demo/demo video.webm`](./demo/demo%20video.webm) (or [watch the hosted demo video](https://github.com/user-attachments/assets/6a1f5e9d-3aa1-43fc-b549-307ddc9b6bec)).
+A step-by-step video demonstration of the browser configuration process is embedded below:
+
+<video src="demo/demo_video_2x.webm" width="100%" autoplay loop muted playsinline controls></video>
+
 - Image references are located in the [`demo/`](./demo/) directory:
   - [`Screenshot_20260527_130225.png`](./demo/Screenshot_20260527_130225.png)
   - [`Screenshot_20260527_130245.png`](./demo/Screenshot_20260527_130245.png)

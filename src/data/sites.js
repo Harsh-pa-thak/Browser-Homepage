@@ -18,6 +18,9 @@ export const SITES = [
   { id: 'movies', name: '123Movies', url: 'https://123movies9.mom', logo: 'https://www.google.com/s2/favicons?sz=64&domain=netflix.com' },
   { id: 'instagram', name: 'Instagram', url: 'https://instagram.com' },
   { id: 'desktop', name: 'Desktop', url: '', isDesktop: true },
+  { id: 'whatsapp', name: 'WhatsApp', url: 'https://web.whatsapp.com/', logo: 'https://www.google.com/s2/favicons?sz=64&domain=whatsapp.com' },
+  { id: 'claude', name: 'Claude', url: 'https://claude.ai', logo: 'https://www.google.com/s2/favicons?sz=64&domain=claude.ai' },
+  { id: 'gpt', name: 'CharGpt', url: 'https://chatgpt.com', logo: 'https://www.google.com/s2/favicons?sz=64&domain=chatgpt.com' }
 ]
 
 export const SIMPLE_SITES = SITES.filter(s => s.type !== 'widget')

@@ -88,7 +88,7 @@ export default function GmailWidget() {
         fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
           headers: { Authorization: `Bearer ${accessToken}` },
         }),
-        fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages?q=in:inbox&maxResults=6', {
+        fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages?q=in:inbox&maxResults=15', {
           headers: { Authorization: `Bearer ${accessToken}` },
         }),
         fetch('https://gmail.googleapis.com/gmail/v1/users/me/labels/INBOX', {
@@ -202,7 +202,7 @@ export default function GmailWidget() {
           </div>
         ) : emails.length === 0 ? (
           <div className="gmail-state-center">
-            <span className="gmail-state-text">Inbox Zero ✨</span>
+            <span className="gmail-state-text">Inbox Zero</span>
           </div>
         ) : (
           emails.map(email => (

@@ -32,47 +32,48 @@ export default function BentoGrid() {
         <GmailWidget />
       </div>
 
-      <div className="bento-cell bento-youtube">
-        <WidgetSlot name="YouTube" id="youtube" />
-      </div>
-
-      <div className="bento-cell bento-ytmusic">
-        <WidgetSlot name="YouTube Music" id="ytmusic" />
-      </div>
-
       <div className="bento-cell bento-neetcode">
-        <FlipCard site={SITE.neetcode}   initialDelay={400} />
+        <FlipCard site={SITE.neetcode} initialDelay={400} />
       </div>
       <div className="bento-cell bento-unstop">
-        <FlipCard site={SITE.unstop}     initialDelay={1800} />
+        <FlipCard site={SITE.unstop} initialDelay={1800} />
       </div>
       <div className="bento-cell bento-linkedin">
-        <FlipCard site={SITE.linkedin}   initialDelay={900} />
+        <FlipCard site={SITE.linkedin} initialDelay={900} />
       </div>
       <div className="bento-cell bento-internshala">
         <FlipCard site={SITE.internshala} initialDelay={2600} />
       </div>
 
       <div className="bento-cell bento-vtop">
-        <FlipCard site={SITE.vtop}       initialDelay={1200} />
+        <FlipCard site={SITE.vtop} initialDelay={1200} />
       </div>
       <div className="bento-cell bento-lms">
-        <FlipCard site={SITE.lms}        initialDelay={3100} />
+        <FlipCard site={SITE.lms} initialDelay={3100} />
       </div>
       <div className="bento-cell bento-netlify">
-        <FlipCard site={SITE.netlify}    initialDelay={2000} />
+        <FlipCard site={SITE.netlify} initialDelay={2000} />
       </div>
       <div className="bento-cell bento-render">
-        <FlipCard site={SITE.render}     initialDelay={3700} />
+        <FlipCard site={SITE.render} initialDelay={3700} />
       </div>
       <div className="bento-cell bento-movies">
-        <FlipCard site={SITE.movies}     initialDelay={500} />
+        <FlipCard site={SITE.movies} initialDelay={500} />
       </div>
       <div className="bento-cell bento-instagram">
-        <FlipCard site={SITE.instagram}  initialDelay={2300} />
+        <FlipCard site={SITE.instagram} initialDelay={2300} />
       </div>
       <div className="bento-cell bento-desktop">
-        <FlipCard site={SITE.desktop}    initialDelay={4200} />
+        <FlipCard site={SITE.desktop} initialDelay={4200} />
+      </div>
+      <div className="bento-cell bento-whatsapp">
+        <FlipCard site={SITE.whatsapp} initialDelay={4200} />
+      </div>
+      <div className="bento-cell bento-claude">
+        <FlipCard site={SITE.claude} initialDelay={4200} />
+      </div>
+      <div className="bento-cell bento-gpt">
+        <FlipCard site={SITE.gpt} initialDelay={4200} />
       </div>
 
     </div>

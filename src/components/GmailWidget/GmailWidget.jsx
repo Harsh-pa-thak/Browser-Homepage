@@ -100,8 +100,27 @@ export default function GmailWidget() {
         const errBody = await listRes.json().catch(() => ({}))
         const reason = errBody?.error?.message || `HTTP ${listRes.status}`
         if (listRes.status === 401 || listRes.status === 403) {
+          const storedRefreshToken = localStorage.getItem('gmail_refresh_token')
+          if (storedRefreshToken) {
+            try {
+              const refreshRes = await fetch('/.netlify/functions/google-refresh', {
+                method: 'POST',
+                body: JSON.stringify({ refresh_token: storedRefreshToken })
+              })
+              const refreshData = await refreshRes.json()
+              if (refreshRes.ok && refreshData.access_token) {
+                localStorage.setItem('gmail_token', refreshData.access_token)
+                setToken(refreshData.access_token)
+                return fetchAll(refreshData.access_token)
+              }
+            } catch (err) {
+              console.error('Refresh request failed', err)
+            }
+          }
           localStorage.removeItem('gmail_token')
+          localStorage.removeItem('gmail_refresh_token')
           setToken(null)
+          throw new Error('Session expired, please log in again')
         }
         throw new Error(reason)
       }
@@ -133,14 +152,32 @@ export default function GmailWidget() {
   }, [token, fetchAll])
 
   const login = useGoogleLogin({
+    flow: 'auth-code',
     scope: [
       'https://www.googleapis.com/auth/gmail.readonly',
       'https://www.googleapis.com/auth/userinfo.email',
       'https://www.googleapis.com/auth/userinfo.profile',
     ].join(' '),
-    onSuccess: (res) => {
-      localStorage.setItem('gmail_token', res.access_token)
-      setToken(res.access_token)
+    onSuccess: async (codeResponse) => {
+      setLoading(true)
+      try {
+        const res = await fetch('/.netlify/functions/google-auth', {
+          method: 'POST',
+          body: JSON.stringify({ code: codeResponse.code })
+        })
+        const data = await res.json()
+        if (!res.ok) throw new Error(data.error || 'Auth exchange failed')
+        
+        localStorage.setItem('gmail_token', data.access_token)
+        if (data.refresh_token) {
+          localStorage.setItem('gmail_refresh_token', data.refresh_token)
+        }
+        setToken(data.access_token)
+      } catch (err) {
+        setError('Login failed: ' + err.message)
+      } finally {
+        setLoading(false)
+      }
     },
     onError: () => setError('Login failed'),
   })

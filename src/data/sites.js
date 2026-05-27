@@ -8,7 +8,7 @@ const BASE_SITES = [
   { id: 'linkedin', name: 'LinkedIn', url: 'https://linkedin.com' },
   { id: 'unstop', name: 'Unstop', url: 'https://unstop.com' },
   { id: 'internshala', name: 'Internshala', url: 'https://internshala.com' },
-  { id: 'vtop', name: 'VTOP', url: 'https://vtop.vit.ac.in', logo: '/logos/vit.png' },
+  { id: 'vtop', name: 'VTOP', url: 'https://vtopcc.vit.ac.in/vtop/content', logo: '/logos/vit.png' },
   { id: 'lms', name: 'LMS', url: 'https://lms.vit.ac.in', logo: '/logos/lms.png' },
   { id: 'netlify', name: 'Netlify', url: 'https://netlify.com' },
   { id: 'render', name: 'Render', url: 'https://render.com' },

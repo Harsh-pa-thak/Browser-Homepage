@@ -12,3 +12,21 @@
   min-height: 0;
   overflow: hidden;
 }
+
+.app-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary, #888);
+  padding-top: 8px;
+}
+
+.app-footer a {
+  color: var(--text-secondary, #888);
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.app-footer a:hover {
+  color: var(--text-primary, #333);
+  text-decoration: underline;
+}

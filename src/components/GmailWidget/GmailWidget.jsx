@@ -153,6 +153,8 @@ export default function GmailWidget() {
 
   const login = useGoogleLogin({
     flow: 'auth-code',
+    access_type: 'offline',
+    prompt: 'consent',
     scope: [
       'https://www.googleapis.com/auth/gmail.readonly',
       'https://www.googleapis.com/auth/userinfo.email',

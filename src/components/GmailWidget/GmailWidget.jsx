@@ -110,7 +110,7 @@ export default function GmailWidget() {
         userRes.json(), listRes.json(), labelRes.json()
       ])
       setUserInfo(userJson)
-      setUnreadTotal(labelData.messagesUnread ?? 0)
+      setUnreadTotal(labelData.messagesUnread > 99 ? 99 : labelData.messagesUnread)
 
       const msgs = await Promise.all(
         (listData.messages || []).map(m =>
@@ -155,12 +155,12 @@ export default function GmailWidget() {
         <div className="gmail-brand">
           {/* Gmail 'M' logo in SVG — no file needed */}
           <svg className="gmail-logo-svg" viewBox="0 0 48 48" width="28" height="28">
-            <path fill="#EA4335" d="M6 40h6V20.6L2 15v21a3 3 0 003 3z"/>
-            <path fill="#34A853" d="M36 40h6a3 3 0 003-3V15l-9 5.6z"/>
-            <path fill="#4285F4" d="M36 8l-12 7.6L12 8H6l18 11.4L42 8z"/>
-            <path fill="#FBBC04" d="M2 15l10 5.6V8z"/>
-            <path fill="#EA4335" d="M42 8l-6 12.6L46 15z"/>
-            <path fill="#C5221F" d="M12 20.6L6 15l6-7.1z"/>
+            <path fill="#EA4335" d="M6 40h6V20.6L2 15v21a3 3 0 003 3z" />
+            <path fill="#34A853" d="M36 40h6a3 3 0 003-3V15l-9 5.6z" />
+            <path fill="#4285F4" d="M36 8l-12 7.6L12 8H6l18 11.4L42 8z" />
+            <path fill="#FBBC04" d="M2 15l10 5.6V8z" />
+            <path fill="#EA4335" d="M42 8l-6 12.6L46 15z" />
+            <path fill="#C5221F" d="M12 20.6L6 15l6-7.1z" />
           </svg>
           <div className="gmail-header-text">
             <span className="gmail-title">Gmail</span>
@@ -184,11 +184,11 @@ export default function GmailWidget() {
         {!token ? (
           <div className="gmail-state" onClick={() => login()}>
             <svg width="24" height="24" viewBox="0 0 48 48" style={{ marginBottom: 8 }}>
-              <path fill="#EA4335" d="M6 40h6V20.6L2 15v21a3 3 0 003 3z"/>
-              <path fill="#34A853" d="M36 40h6a3 3 0 003-3V15l-9 5.6z"/>
-              <path fill="#4285F4" d="M36 8l-12 7.6L12 8H6l18 11.4L42 8z"/>
-              <path fill="#FBBC04" d="M2 15l10 5.6V8z"/>
-              <path fill="#EA4335" d="M42 8l-6 12.6L46 15z"/>
+              <path fill="#EA4335" d="M6 40h6V20.6L2 15v21a3 3 0 003 3z" />
+              <path fill="#34A853" d="M36 40h6a3 3 0 003-3V15l-9 5.6z" />
+              <path fill="#4285F4" d="M36 8l-12 7.6L12 8H6l18 11.4L42 8z" />
+              <path fill="#FBBC04" d="M2 15l10 5.6V8z" />
+              <path fill="#EA4335" d="M42 8l-6 12.6L46 15z" />
             </svg>
             <span className="gmail-state-text">Connect Gmail</span>
           </div>

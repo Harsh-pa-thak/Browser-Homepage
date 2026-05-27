@@ -1,10 +1,10 @@
 import { useState, useCallback, useRef } from 'react'
 
 export function useGoogleAuth(clientId) {
-  const [token, setToken]     = useState(null)
+  const [token, setToken] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [error, setError]     = useState(null)
-  const clientRef             = useRef(null)
+  const [error, setError] = useState(null)
+  const clientRef = useRef(null)
 
   const signIn = useCallback(() => {
     if (!clientId) {
@@ -36,17 +36,17 @@ export function useGoogleAuth(clientId) {
       initAndRequest()
     } else {
       const s = document.createElement('script')
-      s.src   = 'https://accounts.google.com/gsi/client'
+      s.src = 'https://accounts.google.com/gsi/client'
       s.async = true
       s.defer = true
-      s.onload  = initAndRequest
+      s.onload = initAndRequest
       s.onerror = () => { setLoading(false); setError('Failed to load Google sign-in') }
       document.head.appendChild(s)
     }
   }, [clientId])
 
   const signOut = useCallback(() => {
-    if (token) window.google?.accounts?.oauth2?.revoke(token, () => {})
+    if (token) window.google?.accounts?.oauth2?.revoke(token, () => { })
     setToken(null)
     clientRef.current = null
   }, [token])

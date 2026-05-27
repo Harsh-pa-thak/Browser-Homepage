@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react'
 const BASE = 'https://alfa-leetcode-api.onrender.com'
 
 export function useLeetCode(username) {
-  const [data, setData]       = useState(null)
+  const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [error, setError]     = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     if (!username) return
@@ -27,9 +27,9 @@ export function useLeetCode(username) {
         if (!profileRes.ok) throw new Error(`API ${profileRes.status}`)
 
         const profile = await profileRes.json()
-        const badges  = badgesRes.ok  ? (await badgesRes.json()).badges || [] : []
-        const solved  = solvedRes.ok  ? await solvedRes.json()               : {}
-        const contest = contestRes.ok ? await contestRes.json()              : {}
+        const badges = badgesRes.ok ? (await badgesRes.json()).badges || [] : []
+        const solved = solvedRes.ok ? await solvedRes.json() : {}
+        const contest = contestRes.ok ? await contestRes.json() : {}
 
         if (!cancelled) {
           setData({ ...profile, ...solved, badges, contest })

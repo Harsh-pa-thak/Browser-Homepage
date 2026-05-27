@@ -1,12 +1,9 @@
 export const SITES = [
-  // --- Large API-powered tiles (handled individually in BentoGrid) ---
   { id: 'github', name: 'GitHub', url: 'https://github.com', type: 'widget' },
   { id: 'leetcode', name: 'LeetCode', url: 'https://leetcode.com', type: 'widget' },
   { id: 'gmail', name: 'Gmail', url: 'https://mail.google.com', type: 'widget' },
   { id: 'youtube', name: 'YouTube', url: 'https://youtube.com', type: 'widget' },
   { id: 'ytmusic', name: 'YouTube Music', url: 'https://music.youtube.com', type: 'widget' },
-
-  // --- Simple flip-card tiles ---
   { id: 'neetcode', name: 'NeetCode', url: 'https://neetcode.io' },
   { id: 'linkedin', name: 'LinkedIn', url: 'https://linkedin.com' },
   { id: 'unstop', name: 'Unstop', url: 'https://unstop.com' },

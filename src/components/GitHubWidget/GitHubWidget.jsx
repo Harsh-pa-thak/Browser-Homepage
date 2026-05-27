@@ -45,7 +45,6 @@ export default function GitHubWidget() {
   return (
     <div className="gh-widget" onClick={() => window.open(`https://github.com/${username}`, '_blank')}>
 
-      {/* Top: Avatar, Name, and GitHub Icon */}
       <div className="gh-top">
         <div className="gh-user">
           {profile?.avatar_url ? (
@@ -63,7 +62,6 @@ export default function GitHubWidget() {
         </div>
       </div>
 
-      {/* Middle: Horizontal Stats Row */}
       <div className="gh-stats-row">
         <div className="gh-stat">
           <span className="gh-stat-val">{profile?.public_repos ?? '—'}</span>
@@ -81,7 +79,6 @@ export default function GitHubWidget() {
         </div>
       </div>
 
-      {/* Bottom: Streak SVG */}
       <div className="gh-streak-area">
         <img
           src={`https://streak-stats.demolab.com/?user=${username}&theme=dark&hide_border=true&background=00000000&currStreakNum=ffffff&sideNums=ffffff&currStreakLabel=888888&sideLabels=888888&dates=666666&stroke=00000000`}

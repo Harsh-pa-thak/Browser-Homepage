@@ -14,9 +14,16 @@
   overflow: hidden;
   box-sizing: border-box;
 }
-.lc-widget:hover { border-color: var(--border-hover); }
 
-.lc-state { align-items: center; justify-content: center; }
+.lc-widget:hover {
+  border-color: var(--border-hover);
+}
+
+.lc-state {
+  align-items: center;
+  justify-content: center;
+}
+
 .lc-state-text {
   font-size: 11px;
   color: var(--text-dim);
@@ -30,9 +37,23 @@
   align-items: center;
   flex-shrink: 0;
 }
-.lc-brand { display: flex; align-items: center; gap: 7px; }
-.lc-brand-name { font-size: 13px; font-weight: 600; color: var(--text); }
-.lc-username   { font-size: 11px; color: var(--text-muted); }
+
+.lc-brand {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.lc-brand-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.lc-username {
+  font-size: 11px;
+  color: var(--text-muted);
+}
 
 /* ── 3-column body ── */
 .lc-body {
@@ -87,7 +108,11 @@
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
-.lc-bar-total { color: var(--text-dim); font-weight: 400; }
+
+.lc-bar-total {
+  color: var(--text-dim);
+  font-weight: 400;
+}
 
 /* Center — donut ring fills remaining space */
 .lc-center {
@@ -117,7 +142,13 @@
   gap: 3px;
   pointer-events: none;
 }
-.lc-ring-num-row { display: flex; align-items: baseline; gap: 2px; }
+
+.lc-ring-num-row {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
 .lc-ring-big {
   font-size: 52px;
   font-weight: 800;
@@ -126,8 +157,20 @@
   font-variant-numeric: tabular-nums;
   letter-spacing: -2px;
 }
-.lc-ring-of    { font-size: 15px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
-.lc-ring-label { font-size: 12px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.lc-ring-of {
+  font-size: 15px;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.lc-ring-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
 /* Right column — stats */
 .lc-right {
@@ -146,6 +189,7 @@
   flex-direction: column;
   gap: 2px;
 }
+
 .lc-stat-label {
   font-size: 11px;
   font-weight: 600;
@@ -153,6 +197,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
 .lc-stat-val {
   font-size: 20px;
   font-weight: 800;
@@ -182,7 +227,11 @@
   opacity: 0.85;
   transition: opacity 0.2s, transform 0.2s;
 }
-.lc-badge:hover { opacity: 1; transform: scale(1.1); }
+
+.lc-badge:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
 
 /* ── Skeleton ── */
 .lc-sk {
@@ -191,11 +240,29 @@
   animation: lc-pulse 1.6s ease-in-out infinite;
   flex-shrink: 0;
 }
-.lc-sk-h      { height: 18px; width: 50%; }
-.lc-sk-main   { flex: 1; min-height: 0; }
-.lc-sk-badges { height: 44px; }
+
+.lc-sk-h {
+  height: 18px;
+  width: 50%;
+}
+
+.lc-sk-main {
+  flex: 1;
+  min-height: 0;
+}
+
+.lc-sk-badges {
+  height: 44px;
+}
 
 @keyframes lc-pulse {
-  0%, 100% { opacity: 0.3; }
-  50%       { opacity: 0.65; }
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.65;
+  }
 }

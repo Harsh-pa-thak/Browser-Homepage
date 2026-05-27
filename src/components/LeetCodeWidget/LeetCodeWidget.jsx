@@ -107,7 +107,6 @@ export default function LeetCodeWidget() {
       target="_blank"
       rel="noreferrer"
     >
-      {/* Header */}
       <div className="lc-header">
         <div className="lc-brand">
           <img
@@ -119,17 +118,14 @@ export default function LeetCodeWidget() {
         </div>
       </div>
 
-      {/* ── 3-column body ── */}
       <div className="lc-body">
 
-        {/* Left: Easy / Med / Hard bars */}
         <div className="lc-left">
           <DiffBar label="Easy" solved={easySolved} total={totalEasy} color="#00b8a3" />
           <DiffBar label="Med" solved={medSolved} total={totalMed} color="#ffa116" />
           <DiffBar label="Hard" solved={hardSolved} total={totalHard} color="#ef4444" />
         </div>
 
-        {/* Center: Donut ring */}
         <div className="lc-center">
           <div className="lc-ring-wrap">
             <DonutChart easy={easySolved} medium={medSolved} hard={hardSolved} />
@@ -143,7 +139,6 @@ export default function LeetCodeWidget() {
           </div>
         </div>
 
-        {/* Right: Rating / Contest / Global */}
         <div className="lc-right">
           {contestRating && (
             <div className="lc-stat">
@@ -165,7 +160,6 @@ export default function LeetCodeWidget() {
 
       </div>
 
-      {/* ── Badges — full width, bigger ── */}
       {data.badges?.length > 0 && (
         <div className="lc-badges">
           {data.badges.map((b, i) => (

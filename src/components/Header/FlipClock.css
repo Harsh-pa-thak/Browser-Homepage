@@ -1,4 +1,3 @@
-
 .flip-clock-row {
   display: flex;
   align-items: center;
@@ -92,17 +91,32 @@
   transform-origin: center top;
 }
 
-.fc-flap-top .fc-digit  { top: 0; }
-.fc-flap-bot .fc-digit  { top: -44px; }
+.fc-flap-top .fc-digit {
+  top: 0;
+}
+
+.fc-flap-bot .fc-digit {
+  top: -44px;
+}
 
 @keyframes fc-fall {
-  from { transform: rotateX(0deg); }
-  to   { transform: rotateX(-90deg); }
+  from {
+    transform: rotateX(0deg);
+  }
+
+  to {
+    transform: rotateX(-90deg);
+  }
 }
 
 @keyframes fc-rise {
-  from { transform: rotateX(90deg); }
-  to   { transform: rotateX(0deg); }
+  from {
+    transform: rotateX(90deg);
+  }
+
+  to {
+    transform: rotateX(0deg);
+  }
 }
 
 .fc-anim-fall {
@@ -135,5 +149,3 @@
   user-select: none;
   font-variant-numeric: tabular-nums;
 }
-
-

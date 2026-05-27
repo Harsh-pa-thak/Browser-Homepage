@@ -150,10 +150,8 @@ export default function GmailWidget() {
   return (
     <div className="gmail-widget">
 
-      {/* Header */}
-      <div className="gmail-header" onClick={() => window.open('https://mail.google.com', '_blank')}>
-        <div className="gmail-brand">
-          {/* Gmail 'M' logo in SVG — no file needed */}
+      <div className="gmail-header">
+        <div className="gmail-brand" onClick={() => window.open('https://mail.google.com', '_blank')}>
           <svg className="gmail-logo-svg" viewBox="0 0 48 48" width="28" height="28">
             <path fill="#EA4335" d="M6 40h6V20.6L2 15v21a3 3 0 003 3z" />
             <path fill="#34A853" d="M36 40h6a3 3 0 003-3V15l-9 5.6z" />
@@ -167,7 +165,8 @@ export default function GmailWidget() {
             {userInfo && <span className="gmail-email">{userInfo.email}</span>}
           </div>
         </div>
-        <div className="gmail-header-right">
+        <button className="compose-btn" onClick={() => window.open('https://mail.google.com/mail/u/0/#compose?compose=new', '_blank')}>Compose</button>
+        <div className="gmail-header-right" onClick={() => window.open('https://mail.google.com', '_blank')}>
           {unreadTotal > 0 && (
             <span className="gmail-unread-count">+{unreadTotal}</span>
           )}
@@ -179,7 +178,6 @@ export default function GmailWidget() {
         </div>
       </div>
 
-      {/* List */}
       <div className="gmail-list">
         {!token ? (
           <div className="gmail-state" onClick={() => login()}>

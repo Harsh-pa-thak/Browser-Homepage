@@ -23,8 +23,15 @@ const BASE_SITES = [
 const userSitesOverrides = JSON.parse(localStorage.getItem('CUSTOM_SITES') || '{}')
 
 export const SITES = BASE_SITES.map(site => {
-  if (userSitesOverrides[site.id]) {
-    return { ...site, ...userSitesOverrides[site.id] }
+  const override = userSitesOverrides[site.id]
+  if (override) {
+    const newSite = { ...site, ...override }
+    // If the URL is changed by the user, the original hardcoded logo is no longer valid.
+    // We clear it so that FlipCard automatically falls back to fetching the new Google Favicon.
+    if (override.url && override.url !== site.url) {
+      newSite.logo = ''
+    }
+    return newSite
   }
   return site
 })

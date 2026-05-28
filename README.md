@@ -68,9 +68,17 @@ A step-by-step demonstration of the browser configuration process is embedded be
 
 ## Gmail API Access
 
-Due to Gmail API security regulations and strict rate-limiting controls, live integration requires direct user authorization.
+When connecting your Gmail account, you may see a warning that the app is not verified. This is normal during the pre-verification period and does not affect the functionality.
 
-To request credential registration for the Gmail integration on your dashboard, contact the developer:
+**How to proceed:**
+
+1. When the warning page appears, click on **Advanced**.
+2. Then click on **Go to [app name] (unsafe)** to continue.
+3. Follow the prompts to authorize Gmail access.
+
+After giving permission, the Gmail features will work normally.
+
+If you have trouble, contact the developer:  
 - **Developer Contact**: [https://harsh-pathak.netlify.app/](https://harsh-pathak.netlify.app/)
 
 ---

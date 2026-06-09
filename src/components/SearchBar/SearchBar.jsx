@@ -11,7 +11,6 @@ export default function SearchBar() {
   const debounceRef = useRef(null)
   const wrapperRef = useRef(null)
 
-  // Fetch suggestions via JSONP (avoids CORS)
   const fetchSuggestions = useCallback((q) => {
     if (!q.trim()) { setSuggestions([]); setShowDropdown(false); return }
     const cbName = `__gsc_${Date.now()}`
@@ -28,7 +27,6 @@ export default function SearchBar() {
     document.head.appendChild(script)
   }, [])
 
-  // Debounce input changes
   const handleChange = (e) => {
     const val = e.target.value
     setQuery(val)
@@ -37,7 +35,6 @@ export default function SearchBar() {
     debounceRef.current = setTimeout(() => fetchSuggestions(val), 200)
   }
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handler = (e) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
@@ -132,7 +129,7 @@ export default function SearchBar() {
               <path fill="#4285f4" d="m12 15c1.66 0 3-1.31 3-2.97v-7.02c0-1.66-1.34-3.01-3-3.01s-3 1.34-3 3.01v7.02c0 1.66 1.34 2.97 3 2.97z"></path>
               <path fill="#34a853" d="m12 18.08h2v3.92h-2z"></path>
               <path fill="#fbbc04" d="m9 16.87c-1.27-1.33-2.05-2.8-2.05-4.67h-2c0 2.6 1.47 4.81 3.65 6.18v0.03z"></path>
-              <path fill="#ea4335" d="m13 16.93a4.97 5.25 0 0 1 -3.54 -1.55l-1.41 1.49c1.26 1.34 3.02 2.13 4.95 2.13 3.87 0 6.99-2.92 6.99-7h-1.99c0 2.92-2.24 4.93-5 4.93z"></path>
+              <path fill="#ea4335" d="m12 16.93a4.97 5.25 0 0 1 -3.54 -1.55l-1.41 1.49c1.26 1.34 3.02 2.13 4.95 2.13 3.87 0 6.99-2.92 6.99-7h-1.99c0 2.92-2.24 4.93-5 4.93z"></path>
             </svg>
           </button>
 
@@ -143,20 +140,16 @@ export default function SearchBar() {
             onClick={handleLens}
             aria-label="Search by image"
           >
-            <svg focusable="false" viewBox="0 0 192 192" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-              <rect fill="none" height="192" width="192"></rect>
-              <g>
-                <circle cx="96" cy="96" fill="#4285f4" r="14"></circle>
-                <circle cx="152" cy="152" fill="#34a853" r="8"></circle>
-                <path d="m134 68c-12.15 0-22-9.85-22-22v-6h-24v6c0 23.2-18.8 42-42 42h-6v24h6c12.15 0 22 9.85 22 22v6h24v-6c0-23.2 18.8-42 42-42h6v-24h-6z" fill="#fbbc04"></path>
-                <path d="m40 76h6c23.2 0 42-18.8 42-42v-6h-24v6c0 12.15-9.85 22-22 22h-6v24z" fill="#ea4335"></path>
-                <path d="m112 40v-6h-24v6c0 23.2 18.8 42 42 42h6v-24h-6c-12.15 0-22-9.85-22-22z" fill="#4285f4"></path>
-                <path d="m134 116c-12.15 0-22 9.85-22 22v6h24v-6c0-23.2 18.8-42 42-42h6v24h-6c-23.2 0-42 18.8-42 42z" fill="#34a853"></path>
-                <path d="m88 152v6h24v-6c0-23.2-18.8-42-42-42h-6v24h6c12.15 0 22 9.85 22 22z" fill="#ea4335"></path>
-              </g>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="5" width="18" height="14" rx="3" stroke="#5f6368" strokeWidth="1.5" fill="none" />
+              <circle cx="12" cy="12" r="4.5" fill="none" stroke="#5f6368" strokeWidth="1.4" />
+              <circle cx="12" cy="12" r="1.5" fill="#4285f4" />
+              <path d="M3 8.5 V6 Q3 5 4 5 H6.5" stroke="#4285f4" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+              <path d="M21 8.5 V6 Q21 5 20 5 H17.5" stroke="#ea4335" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+              <path d="M3 15.5 V18 Q3 19 4 19 H6.5" stroke="#34a853" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+              <path d="M21 15.5 V18 Q21 19 20 19 H17.5" stroke="#fbbc04" strokeWidth="2.2" strokeLinecap="round" fill="none" />
             </svg>
           </button>
-
           <button
             id="ai-mode-btn"
             type="button"
@@ -164,10 +157,16 @@ export default function SearchBar() {
             onClick={handleAI}
             aria-label="AI Mode"
           >
-            <svg focusable="false" viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19.7 13.3c-1.3-1.4-2-3.1-2-4.9 0-1.8.7-3.5 2-4.9.4-.4.4-1 0-1.4-1.4-1.3-3.1-2-4.9-2-1.8 0-3.5.7-4.9 2-1.3 1.4-2 3.1-2 4.9 0 1.8.7 3.5 2 4.9 1.4 1.3 3.1 2 4.9 2 1.8 0 3.5-.7 4.9-2 .4-.4.4-1 0-1.4z" fill="#4285f4" />
-              <path d="M10.1 19.3c-1.2-1.3-1.8-3-1.8-4.8 0-1.8.6-3.4 1.8-4.8.4-.4.4-1 0-1.4-1.3-1.2-2.9-1.9-4.7-1.9-1.8 0-3.4.6-4.7 1.9-1.2 1.3-1.8 3-1.8 4.8 0 1.8.6 3.4 1.8 4.8 1.3 1.2 2.9 1.9 4.7 1.9 1.8 0 3.4-.6 4.7-1.9.4-.4.4-1 0-1.4z" fill="#ea4335" />
-              <path d="M14.6 23.3c-.9-1-1.3-2.3-1.3-3.6 0-1.3.5-2.6 1.3-3.6.3-.3.3-.8 0-1-1-.9-2.3-1.4-3.6-1.4-1.3 0-2.6.5-3.6 1.4-.9 1-1.3 2.3-1.3 3.6 0 1.3.5 2.6 1.3 3.6.3.3.3.8 0 1 1 .9 2.3 1.4 3.6 1.4 1.3 0 2.6-.5 3.6-1.4.3-.3.3-.8 0-1z" fill="#fbbc04" />
+            <svg viewBox="0 0 20 20" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="gem-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#4285f4" />
+                  <stop offset="40%" stopColor="#9b72cb" />
+                  <stop offset="100%" stopColor="#ea4335" />
+                </linearGradient>
+              </defs>
+              <path d="M10 1 C10.4 4.5 13 7.6 16.5 8 C13 8.4 10.4 11.5 10 15 C9.6 11.5 7 8.4 3.5 8 C7 7.6 9.6 4.5 10 1 Z" fill="url(#gem-grad)" />
+              <path d="M16.5 13.5 C16.65 14.6 17.4 15.35 18.5 15.5 C17.4 15.65 16.65 16.4 16.5 17.5 C16.35 16.4 15.6 15.65 14.5 15.5 C15.6 15.35 16.35 14.6 16.5 13.5 Z" fill="#fbbc04" />
             </svg>
             AI Mode
           </button>

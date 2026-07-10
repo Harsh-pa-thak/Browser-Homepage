@@ -1,0 +1,217 @@
+/* ──────────────────────────────────────────────────────────
+   DevDash Popup — Compact Quick-Access Shortcut Grid
+   Width: 380px fixed (Chrome popup max recommended)
+────────────────────────────────────────────────────────── */
+
+:root {
+  --popup-bg:        #0d0d0f;
+  --popup-surface:   #18181c;
+  --popup-border:    rgba(255,255,255,0.07);
+  --popup-accent:    #7c6af7;
+  --popup-text:      #e8e8f0;
+  --popup-muted:     #6b6b80;
+  --popup-hover-bg:  rgba(124, 106, 247, 0.08);
+  --popup-hover-border: rgba(124, 106, 247, 0.3);
+  --radius-tile:     12px;
+  --radius-sm:       8px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 380px;
+  background: var(--popup-bg);
+  color: var(--popup-text);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Root Container ─── */
+.popup-root {
+  width: 380px;
+  background: var(--popup-bg);
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ─── Header ─── */
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px 12px;
+  background: var(--popup-surface);
+  border-bottom: 1px solid var(--popup-border);
+}
+
+.popup-logo {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.popup-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--popup-text);
+  flex: 1;
+}
+
+.popup-home-btn {
+  background: none;
+  border: 1px solid var(--popup-border);
+  border-radius: var(--radius-sm);
+  color: var(--popup-muted);
+  cursor: pointer;
+  padding: 5px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.popup-home-btn:hover {
+  background: var(--popup-hover-bg);
+  border-color: var(--popup-accent);
+  color: var(--popup-accent);
+}
+
+/* ─── Shortcut Grid ─── */
+.popup-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 12px;
+  background: var(--popup-bg);
+}
+
+/* ─── Individual Tile ─── */
+.popup-tile {
+  background: var(--popup-surface);
+  border: 1px solid var(--popup-border);
+  border-radius: var(--radius-tile);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 6px;
+  transition: all 0.15s ease;
+  color: var(--popup-text);
+  font-family: inherit;
+  min-height: 76px;
+  position: relative;
+  overflow: hidden;
+}
+
+.popup-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(124,106,247,0) 0%, rgba(124,106,247,0.04) 100%);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.popup-tile:hover {
+  background: var(--popup-hover-bg);
+  border-color: var(--popup-hover-border);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(124, 106, 247, 0.15);
+}
+
+.popup-tile:hover::before {
+  opacity: 1;
+}
+
+.popup-tile:active {
+  transform: translateY(0);
+}
+
+/* ─── Tile Icon ─── */
+.popup-tile-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.popup-tile-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.popup-tile-initial {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--popup-accent), #5b4fd4);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ─── Tile Name ─── */
+.popup-tile-name {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--popup-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 76px;
+  transition: color 0.15s ease;
+}
+
+.popup-tile:hover .popup-tile-name {
+  color: var(--popup-text);
+}
+
+/* ─── Footer ─── */
+.popup-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 12px 10px;
+  border-top: 1px solid var(--popup-border);
+  background: var(--popup-surface);
+}
+
+.popup-settings-btn {
+  background: none;
+  border: 1px solid var(--popup-border);
+  border-radius: var(--radius-sm);
+  color: var(--popup-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+}
+
+.popup-settings-btn:hover {
+  background: var(--popup-hover-bg);
+  border-color: var(--popup-accent);
+  color: var(--popup-accent);
+}

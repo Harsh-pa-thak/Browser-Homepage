@@ -94,6 +94,7 @@ export default function SettingsPanel({ onClose }) {
                 const override = siteOverrides[site.id] || {}
                 const currentName = override.name !== undefined ? override.name : site.name
                 const currentUrl = override.url !== undefined ? override.url : site.url
+                const currentIcon = override.customIcon !== undefined ? override.customIcon : ''
 
                 return (
                   <div key={site.id} className="settings-site-row">
@@ -110,6 +111,13 @@ export default function SettingsPanel({ onClose }) {
                       onChange={e => handleSiteChange(site.id, 'url', e.target.value)}
                       placeholder="URL"
                       disabled={site.isDesktop}
+                    />
+                    <input
+                      type="text"
+                      value={currentIcon}
+                      onChange={e => handleSiteChange(site.id, 'customIcon', e.target.value)}
+                      placeholder="🖼 Custom icon URL (optional)"
+                      className="settings-icon-input"
                     />
                   </div>
                 )

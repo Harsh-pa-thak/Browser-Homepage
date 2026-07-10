@@ -13,9 +13,10 @@ export default function FlipCard({ site, initialDelay = 0 }) {
     ? (import.meta.env.VITE_DESKTOP_URL || 'file:///home/')
     : site.url
 
+  // Icon priority: user's custom icon → hardcoded logo → Google Favicon API
   const logoSrc = site.isDesktop
     ? null
-    : (site.logo || faviconUrl(site.url))
+    : (site.customIcon || site.logo || faviconUrl(site.url))
 
   useEffect(() => {
     if (hovered) return

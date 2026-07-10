@@ -27,8 +27,9 @@ export const SITES = BASE_SITES.map(site => {
   if (override) {
     const newSite = { ...site, ...override }
     // If the URL is changed by the user, the original hardcoded logo is no longer valid.
-    // We clear it so that FlipCard automatically falls back to fetching the new Google Favicon.
-    if (override.url && override.url !== site.url) {
+    // We clear it so that FlipCard falls back to fetching the Google Favicon for the new URL.
+    // BUT if the user has also provided a customIcon, we keep that — it takes top priority.
+    if (override.url && override.url !== site.url && !override.customIcon) {
       newSite.logo = ''
     }
     return newSite

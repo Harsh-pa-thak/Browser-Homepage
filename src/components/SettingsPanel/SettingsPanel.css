@@ -108,6 +108,15 @@
   margin-bottom: 16px;
 }
 
+/* Icon input gets a slightly subdued style to hint it's optional */
+.settings-icon-input {
+  opacity: 0.75;
+}
+
+.settings-icon-input:focus {
+  opacity: 1;
+}
+
 .settings-group {
   margin-bottom: 16px;
 }
@@ -152,8 +161,8 @@
 
 .settings-site-row {
   display: grid;
-  grid-template-columns: 100px 1fr 1.5fr;
-  gap: 12px;
+  grid-template-columns: 90px 1fr 1.5fr 1.5fr;
+  gap: 10px;
   align-items: center;
   background: rgba(255, 255, 255, 0.02);
   padding: 10px;
@@ -209,7 +218,7 @@
   border-color: rgba(239, 68, 68, 0.5);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .settings-site-row {
     grid-template-columns: 1fr;
     gap: 8px;

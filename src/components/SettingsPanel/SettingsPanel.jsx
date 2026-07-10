@@ -114,11 +114,11 @@ export default function SettingsPanel({ onClose }) {
                       disabled={site.isDesktop}
                     />
                     <input
-                      className='icon-input'
+
                       type="text"
                       value={currentIcon}
                       onChange={e => handleSiteChange(site.id, 'customIcon', e.target.value)}
-                      placeholder="🖼 Custom icon URL (optional)"
+                      placeholder="Custom icon URL"
                       className="settings-icon-input"
                     />
                   </div>

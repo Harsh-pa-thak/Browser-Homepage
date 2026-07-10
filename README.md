@@ -10,7 +10,7 @@ A highly responsive and functional browser homepage designed specifically for de
 ---
 ### Demonstration Walkthrough
 <img src="./demo/demo_video_2x.gif" alt="Demonstration Walkthrough" width="100%" />
----
+
 ## Chrome Extension (Manifest V3)
 
 Browser Homepage is also available as a native **Manifest V3 Chrome Extension** for the ultimate seamless developer experience:

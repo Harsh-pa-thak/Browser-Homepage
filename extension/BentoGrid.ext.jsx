@@ -1,15 +1,9 @@
-/**
- * BentoGrid.ext.jsx — Extension version of BentoGrid
- *
- * Identical to src/components/BentoGrid/BentoGrid.jsx EXCEPT it imports
- * GmailWidget.ext.jsx (which uses chrome.identity) instead of the web version.
- * This avoids any module-swapping complexity in the Vite config.
- */
+
 
 import FlipCard from '@/components/FlipCard/FlipCard'
 import LeetCodeWidget from '@/components/LeetCodeWidget/LeetCodeWidget'
 import GitHubWidget from '@/components/GitHubWidget/GitHubWidget'
-import GmailWidget from '../components/GmailWidget.ext'   // ← extension version
+import GmailWidget from './components/GmailWidget.ext'
 import { SIMPLE_SITES } from '@/data/sites'
 import '@/components/BentoGrid/BentoGrid.css'
 

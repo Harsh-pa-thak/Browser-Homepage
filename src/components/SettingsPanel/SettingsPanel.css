@@ -81,8 +81,35 @@
 
 .settings-content {
   padding: 24px;
-  overflow-y: auto;
+  overflow: auto;
   flex: 1;
+  scrollbar-width: auto;
+  scrollbar-color: rgba(255, 255, 255, 0.25) rgba(255, 255, 255, 0.03);
+}
+
+/* Custom Thicker Scrollbars (Vertical & Horizontal) for Settings Content */
+.settings-content::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.settings-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.settings-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.settings-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.38);
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 .settings-section {
@@ -224,7 +251,7 @@
   border-color: rgba(239, 68, 68, 0.5);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 700px) {
   .settings-site-row {
     grid-template-columns: 1fr;
     gap: 8px;

@@ -36,7 +36,6 @@ export default function SettingsPanel({ onClose }) {
       localStorage.removeItem('CUSTOM_SITES')
     }
 
-    // Force reload to apply new settings to all widgets
     window.location.reload()
   }
 
@@ -54,7 +53,7 @@ export default function SettingsPanel({ onClose }) {
           <h2>Homepage Settings</h2>
           <button className="settings-close" onClick={onClose}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6L6 18M6 6l12 12"/>
+              <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           </button>
         </div>
@@ -65,10 +64,10 @@ export default function SettingsPanel({ onClose }) {
             <div className="settings-group">
               <label>
                 GitHub Username
-                <input 
-                  type="text" 
-                  value={ghId} 
-                  onChange={e => setGhId(e.target.value)} 
+                <input
+                  type="text"
+                  value={ghId}
+                  onChange={e => setGhId(e.target.value)}
                   placeholder="e.g. torvalds"
                 />
               </label>
@@ -76,10 +75,10 @@ export default function SettingsPanel({ onClose }) {
             <div className="settings-group">
               <label>
                 LeetCode Username
-                <input 
-                  type="text" 
-                  value={lcId} 
-                  onChange={e => setLcId(e.target.value)} 
+                <input
+                  type="text"
+                  value={lcId}
+                  onChange={e => setLcId(e.target.value)}
                   placeholder="e.g. neetcode"
                 />
               </label>
@@ -99,20 +98,23 @@ export default function SettingsPanel({ onClose }) {
                 return (
                   <div key={site.id} className="settings-site-row">
                     <span className="site-id-label">{site.name}</span>
-                    <input 
-                      type="text" 
-                      value={currentName} 
+                    <input
+                      className='name-input'
+                      type="text"
+                      value={currentName}
                       onChange={e => handleSiteChange(site.id, 'name', e.target.value)}
                       placeholder="Display Name"
                     />
-                    <input 
-                      type="text" 
-                      value={currentUrl} 
+                    <input
+                      className='url-input'
+                      type="text"
+                      value={currentUrl}
                       onChange={e => handleSiteChange(site.id, 'url', e.target.value)}
                       placeholder="URL"
                       disabled={site.isDesktop}
                     />
                     <input
+                      className='icon-input'
                       type="text"
                       value={currentIcon}
                       onChange={e => handleSiteChange(site.id, 'customIcon', e.target.value)}

@@ -175,6 +175,12 @@
   font-weight: 500;
 }
 
+.name-input,
+.url-input,
+.icon-input {
+  width: auto;
+}
+
 .settings-footer {
   padding: 20px 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);

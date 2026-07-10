@@ -51,32 +51,18 @@ Browser Homepage is also available as a native **Manifest V3 Chrome Extension** 
 - **Native Secure OAuth (`chrome.identity`)**: Gmail authentication runs natively via Chrome Identity API. Tokens are managed directly by your browser and never leave your local machine.
 - **Custom Shortcut Icons**: Easily customize any shortcut's display name, URL, or icon image directly from the Settings panel.
 
-### Installing the Extension Locally
+### Quick Install (No Terminal Needed)
 
-1. Clone the repository and install dependencies:
-   ```bash
-   git clone https://github.com/Harsh-pa-thak/Browser-Homepage.git
-   cd Browser-Homepage
-   npm install
-   ```
-2. Build the extension bundle:
-   ```bash
-   npm run build:extension
-   ```
-3. Load in Google Chrome / Brave / Edge:
-   - Open `chrome://extensions` in your browser.
-   - Enable **Developer mode** in the top right corner.
-   - Click **Load unpacked** and select the `dist-extension/` directory.
+Click below to download the ready-to-use extension package directly:
 
-### Build Commands
+**[📦 Download Chrome Extension (.zip)](https://github.com/Harsh-pa-thak/Browser-Homepage/raw/main/browser-homepage-extension.zip)**
 
-```bash
-# Build production web app (for Netlify / static hosting) -> outputs to dist/
-npm run build:web
+#### 3 Easy Steps to Install:
+1. **Unzip** the downloaded `browser-homepage-extension.zip` file on your computer.
+2. Open Google Chrome (or Brave / Edge) and go to **`chrome://extensions`** (turn on **Developer mode** switch in the top right corner).
+3. Click **Load unpacked** and select the unzipped folder.
 
-# Build Chrome Extension (Manifest V3) -> outputs to dist-extension/
-npm run build:extension
-```
+That's it! Open a new tab to see your new developer homepage.
 
 ---
 

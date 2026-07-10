@@ -3,11 +3,9 @@
   "name": "DevDash — Developer Homepage",
   "description": "A beautiful developer homepage with quick access to bookmarks, GitHub stats, Gmail, LeetCode and more.",
   "version": "1.0.0",
-
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-
   "action": {
     "default_popup": "popup.html",
     "default_title": "DevDash — Quick Links",
@@ -18,22 +16,19 @@
       "128": "icons/icon128.png"
     }
   },
-
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-
   "permissions": [
     "identity",
     "storage",
     "identity.email"
   ],
-
   "oauth2": {
-    "client_id": "REPLACE_WITH_YOUR_CHROME_EXTENSION_CLIENT_ID.apps.googleusercontent.com",
+    "client_id": "555935693368-g58h1bq4s7f8ic10ftd992bdirv6iua0.apps.googleusercontent.com",
     "scopes": [
       "https://mail.google.com/",
       "openid",
@@ -41,17 +36,14 @@
       "profile"
     ]
   },
-
   "host_permissions": [
     "https://mail.googleapis.com/*",
     "https://api.github.com/*",
     "https://alfa-leetcode-api.onrender.com/*"
   ],
-
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   },
-
   "background": {
     "service_worker": "background.js",
     "type": "module"

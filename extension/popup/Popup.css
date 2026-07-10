@@ -1,28 +1,26 @@
-/* ──────────────────────────────────────────────────────────
-   DevDash Popup — Compact Quick-Access Shortcut Grid
-   Width: 380px fixed (Chrome popup max recommended)
-────────────────────────────────────────────────────────── */
-
 :root {
-  --popup-bg:        #0d0d0f;
-  --popup-surface:   #18181c;
-  --popup-border:    rgba(255,255,255,0.07);
-  --popup-accent:    #7c6af7;
-  --popup-text:      #e8e8f0;
-  --popup-muted:     #6b6b80;
-  --popup-hover-bg:  rgba(124, 106, 247, 0.08);
+  --popup-bg: #0d0d0f;
+  --popup-surface: #18181c;
+  --popup-border: rgba(255, 255, 255, 0.07);
+  --popup-accent: #7c6af7;
+  --popup-text: #e8e8f0;
+  --popup-muted: #6b6b80;
+  --popup-hover-bg: rgba(124, 106, 247, 0.08);
   --popup-hover-border: rgba(124, 106, 247, 0.3);
-  --radius-tile:     12px;
-  --radius-sm:       8px;
+  --radius-tile: 12px;
+  --radius-sm: 8px;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
+html,
+body {
   width: 380px;
   background: var(--popup-bg);
   color: var(--popup-text);
@@ -30,7 +28,6 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Root Container ─── */
 .popup-root {
   width: 380px;
   background: var(--popup-bg);
@@ -41,7 +38,6 @@ html, body {
   gap: 0;
 }
 
-/* ─── Header ─── */
 .popup-header {
   display: flex;
   align-items: center;
@@ -83,7 +79,6 @@ html, body {
   color: var(--popup-accent);
 }
 
-/* ─── Shortcut Grid ─── */
 .popup-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -92,7 +87,6 @@ html, body {
   background: var(--popup-bg);
 }
 
-/* ─── Individual Tile ─── */
 .popup-tile {
   background: var(--popup-surface);
   border: 1px solid var(--popup-border);
@@ -116,7 +110,7 @@ html, body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(124,106,247,0) 0%, rgba(124,106,247,0.04) 100%);
+  background: linear-gradient(135deg, rgba(124, 106, 247, 0) 0%, rgba(124, 106, 247, 0.04) 100%);
   opacity: 0;
   transition: opacity 0.15s ease;
 }
@@ -136,7 +130,6 @@ html, body {
   transform: translateY(0);
 }
 
-/* ─── Tile Icon ─── */
 .popup-tile-icon {
   width: 32px;
   height: 32px;
@@ -168,7 +161,6 @@ html, body {
   color: #fff;
 }
 
-/* ─── Tile Name ─── */
 .popup-tile-name {
   font-size: 10px;
   font-weight: 500;
@@ -185,7 +177,6 @@ html, body {
   color: var(--popup-text);
 }
 
-/* ─── Footer ─── */
 .popup-footer {
   display: flex;
   align-items: center;

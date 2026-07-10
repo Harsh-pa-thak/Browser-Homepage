@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://devlopers-hompage.netlify.app/sitemap.xml

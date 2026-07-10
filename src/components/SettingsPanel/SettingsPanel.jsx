@@ -88,7 +88,7 @@ export default function SettingsPanel({ onClose }) {
 
           <section className="settings-section">
             <h3>Flip Cards</h3>
-            <p className="settings-hint">Customize the name and URL for your flip cards.</p>
+            <p className="settings-hint">Customize the name, URL, and icon for your flip cards. Icon URL is optional — leave blank to auto-fetch from Google Favicon.</p>
             <div className="settings-sites-grid">
               {SIMPLE_SITES.map(site => {
                 const override = siteOverrides[site.id] || {}

@@ -224,7 +224,7 @@
   border-color: rgba(239, 68, 68, 0.5);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1200px) {
   .settings-site-row {
     grid-template-columns: 1fr;
     gap: 8px;

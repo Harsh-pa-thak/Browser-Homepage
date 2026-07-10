@@ -1,6 +1,7 @@
 # Developer's Homepage Dashboard
 
 [![Live](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=netlify)](https://devlopers-hompage.netlify.app/)
+[![Download](https://img.shields.io/clojars/dt/:clojar)](https://github.com/Harsh-pa-thak/Browser-Homepage/raw/main/browser-homepage-extension.zip)
 [![Made By](https://img.shields.io/badge/Made%20By-Harsh%20Pathak-blue?style=for-the-badge)](https://harsh-pathak.netlify.app/)
 [![Contributions](https://img.shields.io/badge/Contributions-Open-orange?style=for-the-badge)](https://github.com/Harsh-pa-thak/Browser-Homepage)
 [![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](./LICENSE)

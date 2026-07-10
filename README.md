@@ -10,7 +10,30 @@ A highly responsive and functional browser homepage designed specifically for de
 ---
 ### Demonstration Walkthrough
 <img src="./demo/demo_video_2x.gif" alt="Demonstration Walkthrough" width="100%" />
+---
+## Chrome Extension (Manifest V3)
 
+Browser Homepage is also available as a native **Manifest V3 Chrome Extension** for the ultimate seamless developer experience:
+
+- **New Tab Override**: Replaces Chrome's default new tab page with your customized developer dashboard instantly.
+- **Toolbar Popup Menu**: Click the extension icon in your browser toolbar anytime, anywhere to open a compact quick-links menu with all your configured shortcuts.
+- **Native Secure OAuth (`chrome.identity`)**: Gmail authentication runs natively via Chrome Identity API. Tokens are managed directly by your browser and never leave your local machine.
+- **Custom Shortcut Icons**: Easily customize any shortcut's display name, URL, or icon image directly from the Settings panel.
+
+### Quick Install (No Terminal Needed)
+
+Click below to download the ready-to-use extension package directly:
+
+**[Download Chrome Extension (.zip)](https://github.com/Harsh-pa-thak/Browser-Homepage/raw/main/browser-homepage-extension.zip)**
+
+#### 3 Easy Steps to Install:
+1. **Unzip** the downloaded `browser-homepage-extension.zip` file on your computer.
+2. Open Google Chrome (or Brave / Edge) and go to **`chrome://extensions`** (turn on **Developer mode** switch in the top right corner).
+3. Click **Load unpacked** and select the unzipped folder.
+
+That's it! Open a new tab to see your new developer homepage.
+
+---
 ## Key Features
 
 - **Bento Grid Layout**: A structured and organized grid system that centralizes essential developer tools and custom widgets.
@@ -39,30 +62,6 @@ This is a production-ready, fully hosted web application. No local installation 
 
 Access the live application directly:
 **[https://devlopers-hompage.netlify.app/](https://devlopers-hompage.netlify.app/)**
-
----
-
-## Chrome Extension (Manifest V3)
-
-Browser Homepage is also available as a native **Manifest V3 Chrome Extension** for the ultimate seamless developer experience:
-
-- **New Tab Override**: Replaces Chrome's default new tab page with your customized developer dashboard instantly.
-- **Toolbar Popup Menu**: Click the extension icon in your browser toolbar anytime, anywhere to open a compact quick-links menu with all your configured shortcuts.
-- **Native Secure OAuth (`chrome.identity`)**: Gmail authentication runs natively via Chrome Identity API. Tokens are managed directly by your browser and never leave your local machine.
-- **Custom Shortcut Icons**: Easily customize any shortcut's display name, URL, or icon image directly from the Settings panel.
-
-### Quick Install (No Terminal Needed)
-
-Click below to download the ready-to-use extension package directly:
-
-**[📦 Download Chrome Extension (.zip)](https://github.com/Harsh-pa-thak/Browser-Homepage/raw/main/browser-homepage-extension.zip)**
-
-#### 3 Easy Steps to Install:
-1. **Unzip** the downloaded `browser-homepage-extension.zip` file on your computer.
-2. Open Google Chrome (or Brave / Edge) and go to **`chrome://extensions`** (turn on **Developer mode** switch in the top right corner).
-3. Click **Load unpacked** and select the unzipped folder.
-
-That's it! Open a new tab to see your new developer homepage.
 
 ---
 

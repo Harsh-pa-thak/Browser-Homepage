@@ -33,18 +33,56 @@ A highly responsive and functional browser homepage designed specifically for de
 
 ---
 
-## Live Deployment
+## Live Deployment (Web Version)
 
-This is a production-ready, fully hosted web application. No local installation or compilation is required to utilize this dashboard.
+This is a production-ready, fully hosted web application. No local installation or compilation is required to utilize the web dashboard.
 
 Access the live application directly:
 **[https://devlopers-hompage.netlify.app/](https://devlopers-hompage.netlify.app/)**
 
 ---
 
-## Browser Setup Guide
+## Chrome Extension (Manifest V3)
 
-To integrate this dashboard into your workflow, configure it as your browser's default homepage or new tab page.
+Browser Homepage is also available as a native **Manifest V3 Chrome Extension** for the ultimate seamless developer experience:
+
+- **New Tab Override**: Replaces Chrome's default new tab page with your customized developer dashboard instantly.
+- **Toolbar Popup Menu**: Click the extension icon in your browser toolbar anytime, anywhere to open a compact quick-links menu with all your configured shortcuts.
+- **Native Secure OAuth (`chrome.identity`)**: Gmail authentication runs natively via Chrome Identity API. Tokens are managed directly by your browser and never leave your local machine.
+- **Custom Shortcut Icons**: Easily customize any shortcut's display name, URL, or icon image directly from the Settings panel.
+
+### Installing the Extension Locally
+
+1. Clone the repository and install dependencies:
+   ```bash
+   git clone https://github.com/Harsh-pa-thak/Browser-Homepage.git
+   cd Browser-Homepage
+   npm install
+   ```
+2. Build the extension bundle:
+   ```bash
+   npm run build:extension
+   ```
+3. Load in Google Chrome / Brave / Edge:
+   - Open `chrome://extensions` in your browser.
+   - Enable **Developer mode** in the top right corner.
+   - Click **Load unpacked** and select the `dist-extension/` directory.
+
+### Build Commands
+
+```bash
+# Build production web app (for Netlify / static hosting) -> outputs to dist/
+npm run build:web
+
+# Build Chrome Extension (Manifest V3) -> outputs to dist-extension/
+npm run build:extension
+```
+
+---
+
+## Browser Setup Guide (Web App)
+
+To integrate the web dashboard into your workflow without the Chrome extension, configure it as your browser's default homepage or new tab page.
 
 ### Visual Walkthrough
 A step-by-step demonstration of the browser configuration process is embedded below:

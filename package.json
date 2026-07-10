@@ -4,10 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "vite --config vite.config.web.js",
+    "dev:web": "vite --config vite.config.web.js",
+    "dev:extension": "vite build --config vite.config.extension.js --watch",
+    "build": "vite build --config vite.config.web.js",
+    "build:web": "vite build --config vite.config.web.js",
+    "build:extension": "vite build --config vite.config.extension.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --config vite.config.web.js"
   },
   "dependencies": {
     "@react-oauth/google": "^0.13.5",

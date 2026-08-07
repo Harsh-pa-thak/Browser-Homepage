@@ -38,6 +38,7 @@ export default defineConfig({
 
   root: resolve(__dirname, 'extension'),
   publicDir: resolve(__dirname, 'public'),
+  base: '',
 
   build: {
     outDir: resolve(__dirname, 'dist-extension'),
